@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+:root {
+  --color-canvas: #f7f7f5;
+  --color-surface: #ffffff;
+  --color-recessed: #f1f1ed;
+  --color-line: #e4e4e0;
+  --color-line-input: #d4d4ce;
+  --color-ink: #141413;
+  --color-muted: #5c5c58;
+  --color-accent: #1e3a8a;
+  --color-accent-tint: #eef2ff;
+  --color-success-bg: #ecfdf5;
+  --color-success-fg: #065f46;
+  --color-warn-bg: #fffbeb;
+  --color-warn-fg: #92400e;
+  --color-sealed-bg: #fef2f2;
+  --color-sealed-fg: #991b1b;
+  --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), "JetBrains Mono", ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  border: 1px solid var(--color-line-input);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font: inherit; font-size: 13px; font-weight: 500;
+  padding: 7px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .12s, border-color .12s;
+  text-decoration: none;
+}
+.btn:hover { background: var(--color-recessed); }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn-primary {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+.btn-primary:hover { background: #1b326f; }
+.btn-sealed { background: var(--color-sealed-bg); border-color: #f2d4d4; color: var(--color-sealed-fg); }
+.btn-sm { padding: 4px 10px; font-size: 12px; border-radius: 6px; }
+
+/* Inputs */
+.input, textarea.input, select.input {
+  width: 100%;
+  border: 1px solid var(--color-line-input);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--color-ink);
+  background: var(--color-surface);
+  outline: none;
+}
+.input:focus { border-color: var(--color-accent); box-shadow: 0 0 0 2px var(--color-accent-tint); }
+.input::placeholder { color: #9b9b95; }
+.label { display: block; font-size: 12px; font-weight: 500; color: var(--color-muted); margin-bottom: 5px; }
+
+/* Cards */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.card-h {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--color-line);
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.card-title { font-size: 15px; font-weight: 600; }
+.card-b { padding: 16px; }
+
+/* Pills */
+.pill {
+  display: inline-block;
+  font-size: 12px; font-weight: 500;
+  border-radius: 999px;
+  padding: 2px 10px;
+  line-height: 1.5;
+}
+.pill-success { background: var(--color-success-bg); color: var(--color-success-fg); }
+.pill-warn { background: var(--color-warn-bg); color: var(--color-warn-fg); }
+.pill-sealed { background: var(--color-sealed-bg); color: var(--color-sealed-fg); }
+.pill-neutral { background: var(--color-recessed); color: var(--color-muted); }
+.pill-accent { background: var(--color-accent-tint); color: var(--color-accent); }
+
+/* Tables */
+.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th {
+  text-align: left;
+  font-size: 12px; font-weight: 500;
+  color: var(--color-muted);
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--color-line);
+}
+.tbl td { padding: 10px 12px; border-bottom: 1px solid var(--color-line); }
+.tbl tr:last-child td { border-bottom: none; }
+
+/* Progress */
+.bar { height: 6px; background: var(--color-recessed); border-radius: 4px; overflow: hidden; }
+.bar > div { height: 100%; background: var(--color-accent); }
+
+/* Citation chip */
+.cite {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--color-accent-tint);
+  color: var(--color-accent);
+  font-size: 12px; font-weight: 500;
+  border-radius: 6px;
+  padding: 3px 9px;
+  cursor: pointer;
+  border: none;
+}
