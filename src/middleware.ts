@@ -6,10 +6,14 @@ import { NextResponse, type NextRequest } from "next/server";
 export async function middleware(request: NextRequest) {
   let response = NextResponse.next({ request });
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !anonKey) {
+    return response;
+  }
+
+  try {
+    const supabase = createServerClient(url, anonKey, {
       cookies: {
         getAll() {
           return request.cookies.getAll();
@@ -22,11 +26,13 @@ export async function middleware(request: NextRequest) {
           );
         },
       },
-    }
-  );
+    });
 
-  // Chỉ làm mới session; KHÔNG chặn route ở đây (layout đã redirect khi chưa đăng nhập).
-  await supabase.auth.getUser();
+    // Chỉ làm mới session; KHÔNG chặn route ở đây (layout đã redirect khi chưa đăng nhập).
+    await supabase.auth.getUser();
+  } catch {
+    // Không để lỗi mạng/Edge làm sập toàn bộ site với 500 MIDDLEWARE_INVOCATION_FAILED
+  }
 
   return response;
 }
